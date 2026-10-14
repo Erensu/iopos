@@ -4,42 +4,48 @@ IMU and Odometer Fusion Positioning for Automatic Parking Scenarios
 
 ## Overview
 
-IOPOS is a lightweight positioning library for fusing inertial measurement unit (IMU) data with odometer information in automatic parking scenarios. It is designed for low-cost IMU systems and high-rate wheel-encoder or CAN-based odometry, with the goal of achieving robust and continuous position estimation in constrained environments such as underground parking garages, parking lots, and other structured navigation contexts.
+IOPOS is a lightweight positioning library for fusing IMU data with odometer measurements in automatic parking scenarios. It is designed for low-cost IMU systems and high-rate wheel/vehicle odometry, especially in GNSS-denied conditions such as underground garages and parking lots.
 
-The implementation emphasizes a compact and efficient formulation suitable for embedded or research-oriented applications. It combines IMU orientation estimation, motion-state handling, and odometer-assisted position updates into a unified localization framework.
+The project is intended for compact, practical, and research-friendly localization in constrained driving environments.
 
-## Motivation
+## Features
 
-Automatic parking systems often operate in environments where GNSS is unavailable or unreliable. In such cases, IMU and wheel-odometry data become essential for local positioning. However, raw IMU signals are subject to drift, while odometry alone may be insufficient under complex motion conditions. IOPOS addresses this by combining IMU propagation with odometer constraints and adaptive state updates, providing a practical and robust solution for low-cost navigation.
+- IMU and odometer fusion for 2D vehicle positioning
+- quaternion-based orientation estimation
+- compact C/C++ implementation
+- odometer-assisted motion updates
+- adaptive bias handling and state updates
+- trajectory visualization support with OpenCV
 
-## Key Features
+## Requirements
 
-- IMU and odometer fusion for 2D positioning
-- orientation estimation using complementary and quaternion-based filtering
-- support for low-cost inertial sensors and high-rate wheel odometry
-- adaptive handling of motion states and dynamic updates
-- robust estimation in parking and constrained maneuvering scenarios
-- compact C implementation suitable for integration into embedded systems
-- visualization support for trajectory evaluation
+- CMake
+- OpenCV
+- C/C++ compiler
+- standard math library support
 
-## Core Functional Modules
+## Quick Start
 
-The project includes the following core implementation files:
+```bash
+mkdir -p build
+cd build
+cmake ..
+make
+```
 
-- `iopos.c` — main fusion and positioning algorithms
-- `iopos.h` — declarations and public interfaces
-- `matrix.c` — matrix-related computational utilities
-- `quaternion.c` — quaternion operations and transformations
-- `so3.c` — SO(3)-related mathematical routines
-- `test_iopos.cpp` — example program demonstrating usage and trajectory evaluation
+This builds the sample executable:
 
-## Repository Layout
+```bash
+./test_imu_odo
+```
+
+## Project Layout
 
 ```text
 .
 ├── CMakeLists.txt
-├── LICENSE
 ├── README.md
+├── LICENSE
 ├── iopos.c
 ├── iopos.h
 ├── matrix.c
@@ -52,58 +58,21 @@ The project includes the following core implementation files:
 └── ...
 ```
 
-## Dependencies
+## Example Workflow
 
-- CMake
-- OpenCV
-- C/C++ compiler with standard math support
+The sample program reads IMU and odometer data, fuses them over time, and visualizes the estimated trajectory. It is meant to demonstrate the algorithm in automatic parking use cases.
 
-## Build
+## Notes
 
-From the repository root:
-
-```bash
-mkdir build
-cd build
-cmake ..
-make
-```
-
-This builds the example executable:
-
-- `test_imu_odo`
-
-## Example Usage
-
-The repository includes a sample test program, `test_iopos.cpp`, which demonstrates how to:
-
-1. read IMU and odometer measurements,
-2. initialize the fused positioning state,
-3. update the system over time, and
-4. visualize the estimated trajectory.
-
-The example is intended to show the algorithmic workflow for trajectory estimation in automatic parking scenarios.
-
-## Application Scope
-
-IOPOS is suitable for:
-
-- automatic parking systems
-- underground parking localization
-- low-cost INS/odometry fusion
-- vehicle navigation in GNSS-denied environments
-- embedded research prototypes and algorithm validation
+- The implementation is designed for efficiency and portability.
+- It is suitable for embedded or research-oriented navigation experiments.
+- This project focuses on low-cost fusion in parking environments rather than full GNSS/INS pipeline integration.
 
 ## Contact
 
-QQ: 1971129844, Su Jinglan
-
-Email: 1971129844@qq.com
+- QQ: 1971129844, Su Jinglan
+- Email: 1971129844@qq.com
 
 ## License
 
-This project is released under the MIT-style license included in the repository.
-
-## Note
-
-IOPOS is a compact and practical implementation for IMU and odometer fusion in parking scenarios, with emphasis on efficiency, portability, and ease of integration into vehicle navigation systems.
+This project is released under the license included in the repository.
